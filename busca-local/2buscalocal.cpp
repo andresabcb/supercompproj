@@ -65,7 +65,6 @@ int main(int argc, char** argv) {
 
     float dist;
     float melhor_dist = 100000;
-    // int num_vezes = 0;
 
     atual_ordem_de_visita = cidades;
 
@@ -81,6 +80,12 @@ int main(int argc, char** argv) {
             melhor_dist = dist;
             melhor_ordem_de_visita = atual_ordem_de_visita;
         }
+        // printa como erro só o melhor de todos esses casos
+        cerr << "local: " << dist << " ";
+        for(int id = 0; id < atual_ordem_de_visita.size(); id++){
+            cerr << atual_ordem_de_visita[id].id << " ";
+        }
+        cerr << endl;
 
         // fazer n vezes
         for (int j = 0; j < N-1; j++){
@@ -98,17 +103,14 @@ int main(int argc, char** argv) {
                 cerr << atual_ordem_de_visita[id].id << " ";
             }
             cerr << endl;
-            // num_vezes++;
         }
-        // num_vezes++;
     }
-    // cout << num_vezes << endl;
 
     cout << melhor_dist << " " << 0 << endl;
     for(int id = 0; id < melhor_ordem_de_visita.size(); id++){
         cout << melhor_ordem_de_visita[id].id << " ";
     }
-    cout << endl; 
+    cout << endl;
 
     return 0;
 }
