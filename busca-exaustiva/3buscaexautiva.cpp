@@ -26,12 +26,8 @@ float calcula_total_dist(vector<Ponto> cidades){
     float total_dist = 0;
     float dist;
     for(int i = 0; i < N-1; i++){
-        // Ponto cidade_origem = cidades[i];
-        // Ponto cidade_destino = cidades[i+1];
         dist = calculateDistance(cidades[i], cidades[i+1]);
         total_dist += dist;
-        // cout << "Total Dist---------" << endl;
-        // cout << total_dist << endl;
     }
     // precisa calcular a distancia do ultimo para o final
     dist = calculateDistance(cidades[N], cidades[0]);
@@ -42,7 +38,7 @@ float calcula_total_dist(vector<Ponto> cidades){
 int main(int argc, char** argv) {
     // processando o arquivo recebido
     cin >> N;
-    vector<Ponto> cidades, melhor_ordem_de_visita, atual_ordem_de_visita;
+    vector<Ponto> cidades, cidades_naovisitadas;
     
     for (int i = 0; i < N; i++) {
         float x, y;
@@ -55,13 +51,19 @@ int main(int argc, char** argv) {
         ponto.id = i;
 
         cidades.push_back(ponto);
+
+        // inicializando as cidades nao visitadas
+        cidades_naovisitadas = cidades;
     }
+
+    
+
 
     cout << melhor_dist << " " << 0 << endl;
     for(int id = 0; id < melhor_ordem_de_visita.size(); id++){
         cout << melhor_ordem_de_visita[id].id << " ";
     }
-    cout << endl; 
+    cout << endl;
 
     return 0;
 }

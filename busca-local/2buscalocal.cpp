@@ -9,6 +9,8 @@
 Raciocínio:
 
 shuffle no vetor recebido
+percorrer 10*n vezes calculando as distancias
+swap na ordem das cidades
 */
 
 using namespace std;
@@ -69,18 +71,21 @@ int main(int argc, char** argv) {
     atual_ordem_de_visita = cidades;
 
     default_random_engine generator;
-    shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator); // fixar uma seed
+    shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
     //random_shuffle(cidades.begin(), cidades.end());
 
     for (int i = 0; i < 10; i++) {
         // calcula a distancia do vetor gerado
+        shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
         dist = calcula_total_dist(atual_ordem_de_visita);
 
         if (dist < melhor_dist){
             melhor_dist = dist;
             melhor_ordem_de_visita = atual_ordem_de_visita;
         }
+
         // printa como erro só o melhor de todos esses casos
+        // printa antes de fazer os swaps
         cerr << "local: " << dist << " ";
         for(int id = 0; id < atual_ordem_de_visita.size(); id++){
             cerr << atual_ordem_de_visita[id].id << " ";
@@ -98,6 +103,7 @@ int main(int argc, char** argv) {
             }
 
             // printa como erro só o melhor de todos esses casos
+            // printando depois dos swaps
             cerr << "local: " << dist << " ";
             for(int id = 0; id < atual_ordem_de_visita.size(); id++){
                 cerr << atual_ordem_de_visita[id].id << " ";
