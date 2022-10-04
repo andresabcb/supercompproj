@@ -5,6 +5,14 @@
 #include <cmath>
 #include <random>
 
+// testes pontuais:
+// compilar:
+// g++ -Wall -std=c++11 2buscalocal.cpp -o buscaloc
+// rodar:
+// ./buscaloc < in-N.txt
+// teste geral:
+// python3 corretor.py local
+
 /*
 Raciocínio:
 
@@ -38,11 +46,9 @@ float calcula_total_dist(vector<Ponto> cidades){
         // Ponto cidade_destino = cidades[i+1];
         dist = calculateDistance(cidades[i], cidades[i+1]);
         total_dist += dist;
-        // cout << "Total Dist---------" << endl;
-        // cout << total_dist << endl;
     }
-    // precisa calcular a distancia do ultimo para o final
-    dist = calculateDistance(cidades[N], cidades[0]);
+    // precisa calcular a distancia do ultimo para o inicial
+    dist = calculateDistance(cidades[N-1], cidades[0]);
     total_dist += dist;
     return total_dist;
 }

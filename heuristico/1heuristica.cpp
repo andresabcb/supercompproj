@@ -4,7 +4,13 @@
 #include <iomanip>
 #include <cmath>
 
-// ideia de lógica
+// testes pontuais:
+// compilar:
+// g++ -Wall -std=c++11 1heuristica.cpp -o heuristica
+// rodar:
+// ./heuristica < in-N.txt
+// teste geral:
+// python3 corretor.py heuristico
 
 using namespace std;
 float total_dist = 0;
