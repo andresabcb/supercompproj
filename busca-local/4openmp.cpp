@@ -6,6 +6,7 @@
 #include <random>
 #include <algorithm>    // std::shuffle
 
+
 // testes pontuais:
 // compilar:
 // g++ -Wall -std=c++11 2buscalocal.cpp -o buscaloc
@@ -77,14 +78,16 @@ int main(int argc, char** argv) {
     atual_ordem_de_visita = cidades;
 
     default_random_engine generator;
-    shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
+    std::shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
     //random_shuffle(cidades.begin(), cidades.end());
 
+    #pragma omp parallel for
     for (int i = 0; i < 10; i++) {
         // calcula a distancia do vetor gerado
-        shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
+        std::shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
         dist = calcula_total_dist(atual_ordem_de_visita);
 
+        #pragma omp critical
         if (dist < melhor_dist){
             melhor_dist = dist;
             melhor_ordem_de_visita = atual_ordem_de_visita;
