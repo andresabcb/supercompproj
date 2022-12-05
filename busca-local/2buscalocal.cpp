@@ -81,8 +81,8 @@ int main(int argc, char** argv) {
     shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
     //random_shuffle(cidades.begin(), cidades.end());
 
-    double init_time, final_time;
-    init_time = omp_get_wtime();
+    // double init_time, final_time;
+    // init_time = omp_get_wtime();
     for (int i = 0; i < 10; i++) {
         // calcula a distancia do vetor gerado
         shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
@@ -120,14 +120,14 @@ int main(int argc, char** argv) {
             cerr << endl;
         }
     }
-    final_time = omp_get_wtime() - init_time;
+    //final_time = omp_get_wtime() - init_time;
 
     cout << melhor_dist << " " << 0 << endl;
     for(int id = 0; id < melhor_ordem_de_visita.size(); id++){
         cout << melhor_ordem_de_visita[id].id << " ";
     }
     cout << endl;
-    cout << "Calculated in " << final_time << " secs\n";
+    //cout << "Calculated in " << final_time << " secs\n";
 
     return 0;
 }

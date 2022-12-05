@@ -104,8 +104,8 @@ int main(int argc, char** argv)  {
     // https://www.geeksforgeeks.org/stdnext_permutation-prev_permutation-c/ 
 
     sort(indices.begin(), indices.end());
-    double init_time, final_time;
-    init_time = omp_get_wtime();
+    // double init_time, final_time;
+    // init_time = omp_get_wtime();
     do {
         // cada loop me da um vetor novo de ids
         for (int i = 0; i < indices.size(); i++) {
@@ -127,10 +127,10 @@ int main(int argc, char** argv)  {
     // next permutation nos dá a árvore de combinações de cidades (e nesse caso a ordem importa)
     // idealmente a lógica seria feita usando uma função recursiva
     } while(next_permutation(indices.begin(), indices.end()));
-    final_time = omp_get_wtime() - init_time;
+    // final_time = omp_get_wtime() - init_time;
 
     // printa o erro e a saída esperada
-    cout << "Calculated in " << final_time << " secs\n";
+    // cout << "Calculated in " << final_time << " secs\n";
     print_organizado(melhor_dist,melhor_ordem_de_visita,num_leaf);
 
     return 0;
