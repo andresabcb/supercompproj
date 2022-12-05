@@ -3,6 +3,7 @@
 #include <vector>
 #include <iomanip>
 #include <cmath>
+#include <omp.h>
 
 // testes pontuais:
 // compilar:
@@ -75,6 +76,8 @@ int main(int argc, char** argv) {
     // vamos usar o id do destino para apagar
     Ponto origem_atual = ponto_de_partida;
     int id_cidade_destino;
+    double init_time, final_time;
+    init_time = omp_get_wtime();
     ordem_de_visita.push_back(ponto_de_partida); // para printar
 
     // apagando do vetor a cidade ponto de partida
@@ -98,6 +101,7 @@ int main(int argc, char** argv) {
     // vai da última origem para o ponto de partida e contabiliza isso
     float dist = calculateDistance(origem_atual, ponto_de_partida);
     total_dist += dist;
+    final_time = omp_get_wtime() - init_time;
 
     cout << total_dist << " ";
     cout << 0 << endl;
@@ -105,6 +109,7 @@ int main(int argc, char** argv) {
         cout << ordem_de_visita[id].id << " ";
     }
     cout << endl;
-
+    cout << "Calculated in " << final_time << " secs\n";
+    
     return 0;
 }

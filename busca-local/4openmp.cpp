@@ -5,22 +5,7 @@
 #include <cmath>
 #include <random>
 #include <algorithm>    // std::shuffle
-
-
-// testes pontuais:
-// compilar:
-// g++ -Wall -std=c++11 2buscalocal.cpp -o buscaloc
-// rodar:
-// ./buscaloc < in-N.txt
-// teste geral:
-// python3 corretor.py local
-
-/*
-Raciocínio:
-shuffle no vetor recebido
-percorrer 10*n vezes calculando as distancias
-swap na ordem das cidades
-*/
+#include <omp.h>
 
 using namespace std;
 
@@ -81,6 +66,8 @@ int main(int argc, char** argv) {
     std::shuffle(begin(atual_ordem_de_visita), end(atual_ordem_de_visita), generator);
     //random_shuffle(cidades.begin(), cidades.end());
 
+    double init_time, final_time;
+    init_time = omp_get_wtime();
     #pragma omp parallel for
     for (int i = 0; i < 10; i++) {
         // calcula a distancia do vetor gerado
@@ -93,14 +80,6 @@ int main(int argc, char** argv) {
             melhor_ordem_de_visita = atual_ordem_de_visita;
         }
 
-        // printa como erro só o melhor de todos esses casos
-        // printa antes de fazer os swaps
-        cerr << "local: " << dist << " ";
-        for(int id = 0; id < atual_ordem_de_visita.size(); id++){
-            cerr << atual_ordem_de_visita[id].id << " ";
-        }
-        cerr << endl;
-
         // fazer n vezes
         for (int j = 0; j < N-1; j++){
             iter_swap(atual_ordem_de_visita.begin()+j ,atual_ordem_de_visita.begin()+j+1);
@@ -111,22 +90,17 @@ int main(int argc, char** argv) {
                 melhor_ordem_de_visita = atual_ordem_de_visita;
             }
 
-            // printa como erro só o melhor de todos esses casos
-            // printando depois dos swaps
-            cerr << "local: " << dist << " ";
-            for(int id = 0; id < atual_ordem_de_visita.size(); id++){
-                cerr << atual_ordem_de_visita[id].id << " ";
-            }
-            cerr << endl;
         }
     }
+    final_time = omp_get_wtime() - init_time;
 
     cout << melhor_dist << " " << 0 << endl;
     for(int id = 0; id < melhor_ordem_de_visita.size(); id++){
         cout << melhor_ordem_de_visita[id].id << " ";
     }
     cout << endl;
-
+    cout << "Calculated in " << final_time << " secs\n";
+    
     return 0;
 }
 
